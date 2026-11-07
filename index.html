@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Scheda 3">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#7A3FD1">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Scheda 3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#EFF1EE;--card:#fff;--ink:#16231F;--mut:#5E6B66;--line:#D6DBD7;--acc:#1F4FE0;--accink:#fff;--ok:#1E8A4C;--tim:#FFD23F;--field:#F4F6F4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101614;--card:#1A2320;--ink:#EAF0ED;--mut:#9AA8A2;--line:#2B3733;--acc:#7A97FF;--accink:#0B1020;--ok:#4FD18A;--field:#222D29;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101614;--card:#1A2320;--ink:#EAF0ED;--mut:#9AA8A2;--line:#2B3733;--acc:#7A97FF;--accink:#0B1020;--ok:#4FD18A;--field:#222D29;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:500 15px/1.4 Barlow,-apple-system,system-ui,sans-serif;padding-bottom:130px}
+h1,h2,.num{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;letter-spacing:.2px}
+header{padding:16px 16px 4px}
+h1{margin:0;font-size:30px}
+.sub{color:var(--mut);font-size:13px}
+main{padding:8px 12px;max-width:560px;margin:0 auto}
+.days{display:flex;gap:8px;margin:8px 0 12px}
+.days button{flex:1;padding:10px 0;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font:700 20px "Barlow Condensed",sans-serif}
+.days button.on{background:var(--acc);border-color:var(--acc);color:var(--accink)}
+.wks{display:flex;gap:6px;margin:0 0 12px}
+.wks button{flex:1;padding:7px 0;border:1.5px solid var(--line);background:var(--card);color:var(--mut);border-radius:9px;font:700 16px "Barlow Condensed",sans-serif}
+.wks button.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.ex{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.ex h2{margin:0;font-size:21px;line-height:1.1}
+.meta{color:var(--mut);font-size:13px;margin:2px 0 8px}
+.hint{font-size:13px;margin:0 0 8px;color:var(--mut)}
+.hint b{color:var(--ok)}
+.set{display:grid;grid-template-columns:22px 1fr 1fr 46px;gap:8px;align-items:center;margin-top:6px}
+.set span{color:var(--mut);font-size:13px;text-align:center}
+input{width:100%;padding:10px;border:1.5px solid var(--line);border-radius:9px;background:var(--field);color:var(--ink);font:600 17px Barlow,sans-serif;text-align:center}
+input:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.chk{height:42px;border:1.5px solid var(--line);border-radius:9px;background:var(--card);color:var(--mut);font-size:20px}
+.chk.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.lab{display:grid;grid-template-columns:22px 1fr 1fr 46px;gap:8px;font-size:12px;color:var(--mut);text-align:center}
+.big{width:100%;padding:14px;border:0;border-radius:12px;background:var(--acc);color:var(--accink);font:700 20px "Barlow Condensed",sans-serif;margin:6px 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.row{display:flex;gap:8px;align-items:center}
+.row input{flex:1}
+.btn{padding:11px 16px;border:0;border-radius:10px;background:var(--acc);color:var(--accink);font:700 17px "Barlow Condensed",sans-serif}
+.stat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}
+.stat:last-child{border:0}
+.x{background:none;border:0;color:var(--mut);font-size:18px;padding:0 6px}
+.empty{color:var(--mut);padding:6px 0}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--field);color:var(--mut);font-size:12px;margin-left:6px}
+#timer{display:none;position:fixed;left:12px;right:12px;bottom:calc(66px + env(safe-area-inset-bottom,0px));background:var(--acc);color:var(--accink);padding:8px 8px 10px 16px;border-radius:16px;align-items:center;gap:8px;z-index:5;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+#timer .bar{position:absolute;left:0;bottom:0;height:4px;background:var(--accink);opacity:.55}
+#timer .t{font:700 38px/1 "Barlow Condensed",sans-serif;flex:1}
+#timer button{padding:10px 14px;border:1.5px solid var(--accink);background:transparent;color:var(--accink);border-radius:10px;font:700 17px "Barlow Condensed",sans-serif}
+header{position:relative}
+#tb{position:absolute;right:14px;top:14px;width:46px;height:46px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);font-size:22px;color:var(--ink)}
+#pre{display:none;gap:8px;padding:4px 12px 0;max-width:560px;margin:0 auto}
+#pre button{flex:1;padding:10px 0;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font:700 18px "Barlow Condensed",sans-serif}
+.rest{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-size:14px;color:var(--mut)}
+.rest button{width:38px;height:34px;border:1.5px solid var(--line);border-radius:9px;background:var(--field);color:var(--ink);font:700 20px sans-serif}
+.rest b{color:var(--ink);min-width:44px;text-align:center;font-size:17px}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:6}
+nav button{flex:1;padding:14px 0;border:0;background:none;color:var(--mut);font:700 18px "Barlow Condensed",sans-serif}
+nav button.on{color:var(--acc);box-shadow:inset 0 3px 0 var(--acc)}
+#toast{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:99px;z-index:9;display:none}
+</style>
+</head>
+<body>
+<header><h1 id="ttl">Scheda 3</h1><div class="sub" id="sub"></div><button id="tb" data-t="pre" aria-label="Timer manuale">⏱</button></header>
+<div id="pre"></div>
+<main id="app"></main>
+<div id="toast"></div>
+<div id="timer"></div>
+<nav id="nav"></nav>
+<script>
+const Z=(n,r,d)=>[n,n,n,d,n,n].map(x=>x+"x"+r);
+// id, nome, recupero(s), settimane, distretto, nota
+const EX={
+A:[["g1","Hip thrust",150,Z(3,"6-8",2),"Glutei","Recupero 2–3 min"],
+["g2","RDL (stacco rumeno)",150,Z(3,"8-10",2),"Femorali","Recupero 2–3 min"],
+["g3","Leg curl",90,Z(3,"10-12",2),"Femorali",""],
+["g4","Hyperextension",90,Z(2,"10-12",1),"Femorali e glutei",""],
+["g5","Abduzioni al cavo",75,Z(2,"12-15",1),"Glutei","Serie per lato"],
+["g6","Adduttori",75,Z(2,"12-15",1),"Adduttori",""]],
+B:[["h1","Sumo squat",150,Z(3,"8-10",2),"Glutei e gambe","Recupero 2–3 min"],
+["h2","Hip thrust",120,Z(2,"10-12",1),"Glutei",""],
+["h3","Bulgarian o step-up",120,Z(2,"8-10",1),"Gambe","Per gamba. Bulgarian sett. 1–2 e 5–6, step-up sett. 3"],
+["h4","Slanci al cavo",90,Z(2,"10-12",1),"Glutei","Serie per gamba"],
+["h5","Abduzioni al cavo",75,Z(2,"12-15",1),"Glutei","Serie per lato"],
+["h6","Adduttori",75,Z(2,"12-15",1),"Adduttori",""]],
+C:[["s1","Lento avanti con manubri",150,Z(4,"8-10",3),"Spalle","Panca leggermente inclinata, gomito basso e avanti, scapole unite"],
+["s2","Alzate laterali",90,Z(4,"8-10",3),"Spalle","Pensa ad allungarti, omero leggermente avanti rispetto al busto"],
+["s3","Croci inverse con manubri",90,Z(4,"12",4),"Spalle","Scapole ferme per lavorare i deltoidi posteriori"],
+["s4","Lat machine con triangolo",150,["4x10","4x10","4x11","2x7","4x11","4x12"],"Dorso","Spalle basse, spingi i gomiti verso il basso, vai incontro con il petto"],
+["s5","Pull down con sbarra",90,Z(4,"10-12",2),"Dorso","Apri il petto, spalla indietro, presa non troppo salda"],
+["s6","Curl su panca 45°",90,Z(4,"10-12",2),"Bicipiti","Non portare il gomito indietro in nessuna fase"],
+["s7","Tricipiti a un braccio al cavo alto",90,Z(4,"10-12",2),"Tricipiti","Petto aperto, non ruotare la spalla in avanti"]],
+D:[["u1","Trazioni assistite",120,["3x10","3x8-10","3x8","2x8-10","3x10","3x8-10"],"Dorso",""],
+["u2","Pulley",90,["3x12","3x10-12","3x8-10","2x10","3x10-12","3x8-10"],"Dorso",""],
+["u3","Pulldown",90,["3x12","3x10-12","3x8-10","2x10","3x10-12","3x8-10"],"Dorso",""],
+["u4","Six-way",60,["2x12","3x10-12","3x10","2x10","3x12","3x10"],"Spalle",""],
+["u5","French press",75,["2x15","3x12-15","3x10-12","2x12","3x12","3x10-12"],"Tricipiti",""],
+["u6","Curl a martello",75,["2x12-15","3x10-12","3x8-10","2x12","3x10-12","3x8-10"],"Bicipiti",""]]};
+const DAYN={A:"Glutei e femorali",B:"Glutei e gambe",C:"Parte alta A",D:"Parte alta B"};
+const DAYC={A:"Glutei 1",B:"Glutei 2",C:"Alto A",D:"Alto B"};
+const GL="Riscaldamento escluso dalle serie. Sett. 4 (scarico): carichi −10–15%, 4–5 rip. in riserva, niente cedimento.";
+const FOOT={A:GL,B:GL,C:"Cardio: 40 minuti di tapis roulant a intensità media; se vuoi inclina leggermente.",D:""};
+let S={day:"A",week:0,tab:"w",kg:{},cur:{},hist:{},w:[],diet:{kcal:2800,p:130}};
+try{const r=localStorage.getItem("scheda3");if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+S.rest=S.rest||{};
+const save=()=>{try{localStorage.setItem("scheda3",JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s);
+const today=()=>new Date().toLocaleDateString("sv-SE");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=n=>String(n).replace(".",",");
+const rest=e=>S.rest[e[0]]??e[2];
+const mmss=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+const find=id=>Object.values(EX).flat().find(e=>e[0]===id);
+
+// ---- timer ----
+let T={end:0,tot:0},AC=null;
+function beep(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();[0,.25,.5].forEach(d=>{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=880;g.gain.value=.15;o.connect(g);g.connect(AC.destination);o.start(AC.currentTime+d);o.stop(AC.currentTime+d+.15)});navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}}
+function startT(s){T={end:Date.now()+s*1000,tot:s};try{AC=AC||new (window.AudioContext||window.webkitAudioContext)()}catch(e){}drawT()}
+function stopT(){T.end=0;drawT()}
+let PRE=false;
+function drawT(){
+  const el=$("#timer"),left=T.end?Math.max(0,Math.ceil((T.end-Date.now())/1000)):0;
+  if(T.end&&left===0){T.end=0;beep();toast("Recupero finito: prossima serie")}
+  if(T.end){
+    if(!el.dataset.on){el.dataset.on=1;el.style.display="flex";el.innerHTML='<div class="bar"></div><div class="t"></div><button data-t="add">+15 s</button><button data-t="stop">Ferma</button>'}
+    el.querySelector(".t").textContent=mmss(left);
+    el.querySelector(".bar").style.width=Math.min(100,left/T.tot*100)+"%";
+  }else{el.style.display="none";delete el.dataset.on}
+  $("#pre").style.display=PRE?"flex":"none";
+}
+setInterval(()=>{if(T.end)drawT()},250);
+function toast(m){const t=$("#toast");t.textContent=m;t.style.display="block";clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display="none",2200)}
+
+// ---- scheda ----
+function pres(e){const m=e[3][S.week].match(/^(\d+)x(.+)$/),r=m[2],q=r.split("-");return{n:+m[1],r:r,lo:+q[0]||0,hi:+q[q.length-1]||0}}
+function sets(e){const n=pres(e).n;let a=S.cur[e[0]];if(!a)a=S.cur[e[0]]=[];while(a.length<n)a.push({k:"",r:"",d:0});a.length=n;return a}
+function hint(e){
+  const h=(S.hist[e[0]]||[]).slice(-1)[0];
+  if(!h)return "Primo allenamento: trova un carico con 2–3 rip. di riserva";
+  const p=pres(e),all=p.hi&&h.s.every(x=>+x[1]>=p.hi);
+  return `Ultima volta${h.w?" (sett. "+h.w+")":""}: ${esc(fmt(h.s[0][0]))} kg × ${h.s.map(x=>esc(x[1])).join(", ")}`+(all?` · <b>Sali di 1–2,5 kg</b>`:"");
+}
+function viewW(){
+  let h=`<div class="days">${Object.keys(EX).map(d=>`<button data-day="${d}" class="${d===S.day?"on":""}">${DAYC[d]}</button>`).join("")}</div><div class="wks">${[0,1,2,3,4,5].map(i=>`<button data-wk="${i}" class="${i===S.week?"on":""}">S${i+1}</button>`).join("")}</div>`;
+  h+=EX[S.day].map(e=>{
+    const p=pres(e),ss=sets(e),base=S.kg[e[0]]??"",ph=p.r==="MAX"?"max":p.r;
+    return `<section class="ex"><h2>${e[1]}</h2><div class="meta">${e[4]} · ${p.n} × ${p.r==="MAX"?"max rip.":p.r+" rip."}${e[5]?" · "+e[5]:""}</div>
+    <div class="rest">Recupero <button data-rs="${e[0]}:-15" aria-label="meno 15 secondi">−</button><b>${mmss(rest(e))}</b><button data-rs="${e[0]}:15" aria-label="più 15 secondi">+</button></div><p class="hint">${hint(e)}</p>
+    <div class="lab"><span></span><span>kg</span><span>ripetizioni</span><span></span></div>
+    ${ss.map((s,i)=>`<div class="set"><span>${i+1}</span><input inputmode="decimal" aria-label="kg serie ${i+1}" data-k="${e[0]}:${i}" value="${esc(s.k!==""?s.k:base)}"><input inputmode="numeric" aria-label="ripetizioni serie ${i+1}" data-r="${e[0]}:${i}" value="${esc(s.r)}" placeholder="${ph}"><button class="chk ${s.d?"on":""}" data-c="${e[0]}:${i}" aria-label="serie completata">✓</button></div>`).join("")}</section>`}).join("");
+  h+=`${FOOT[S.day]?`<p class="sub" style="margin:0 4px 10px">${FOOT[S.day]}</p>`:""}<button class="big" data-fin="1">Termina allenamento e salva</button>`;
+  return h;
+}
+// ---- peso ----
+function avg(a){return a.length?a.reduce((x,y)=>x+y.k,0)/a.length:null}
+function viewP(){
+  const w=[...S.w].sort((a,b)=>a.t<b.t?-1:1),now=Date.now(),D=864e5;
+  const inR=(a,b)=>w.filter(x=>{const d=(now-new Date(x.t).getTime())/D;return d>=a&&d<b});
+  const a1=avg(inR(-1,7)),a0=avg(inR(7,14));
+  let st="Servono almeno due settimane di pesate";
+  if(a1!=null&&a0!=null){const d=a1-a0;st=`${d>=0?"+":""}${fmt(d.toFixed(2))} kg a settimana · `+(d<.2?"sotto target: valuta +150–200 kcal":d>.35?"sopra target: riduci di 100–150 kcal":"nel target")}
+  return `<div class="card"><h2>Peso di oggi</h2><div class="row"><input id="wi" inputmode="decimal" placeholder="es. 73,4"><button class="btn" data-addw="1">Salva</button></div><p class="sub">Pesati la mattina a digiuno, dopo il bagno. Target: +0,2–0,35 kg a settimana.</p></div>
+  <div class="card"><div class="stat"><span>Media ultimi 7 giorni</span><b>${a1!=null?fmt(a1.toFixed(2))+" kg":"—"}</b></div><div class="stat"><span>Media 7 giorni precedenti</span><b>${a0!=null?fmt(a0.toFixed(2))+" kg":"—"}</b></div><div class="stat"><span>${st}</span></div></div>
+  <div class="card"><h2>Storico</h2>${w.length?[...w].reverse().slice(0,14).map(x=>`<div class="stat"><span>${x.t.split("-").reverse().join("/")}</span><span><b>${fmt(x.k)} kg</b><button class="x" data-delw="${x.t}" aria-label="elimina">×</button></span></div>`).join(""):'<div class="empty">Nessuna pesata: inserisci la prima qui sopra.</div>'}</div>`;
+}
+// ---- dieta ----
+function viewD(){
+  return `<div class="card"><h2>Obiettivi attuali</h2><div class="row" style="margin-top:8px"><label style="flex:1">Calorie<input id="dk" inputmode="numeric" value="${S.diet.kcal}"></label><label style="flex:1">Proteine (g)<input id="dp" inputmode="numeric" value="${S.diet.p}"></label></div><p class="sub">Riferimento: 1,6–2,2 g di proteine per kg di peso.</p></div>
+  <div class="card"><h2>Piano alimentare<span class="tag">in arrivo</span></h2><p class="empty">Qui aggiungeremo pasti, macro e lista della spesa. Per ora tieni traccia degli obiettivi e del peso.</p></div>`;
+}
+function render(){
+  $("#sub").textContent=S.tab==="w"?DAYN[S.day]+" · Sett. "+(S.week+1)+(S.week===3?" (scarico)":""):S.tab==="p"?"Controllo del peso":"Alimentazione";
+  $("#app").innerHTML=S.tab==="w"?viewW():S.tab==="p"?viewP():viewD();
+  $("#nav").innerHTML=[["w","Allenamento"],["p","Peso"],["d","Dieta"]].map(t=>`<button data-tab="${t[0]}" class="${S.tab===t[0]?"on":""}">${t[1]}</button>`).join("");
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+  if(d.t){if(d.t==="pre"){PRE=!PRE;drawT()}else if(d.t==="stop")stopT();else if(d.t==="add"){T.end+=15000;T.tot+=15;drawT()}else{PRE=false;startT(+d.t)}return}
+  if(d.rs){const[id,dl]=d.rs.split(":");S.rest[id]=Math.min(600,Math.max(15,rest(find(id))+ +dl));save();render();return}
+  if(d.wk){S.week=+d.wk;save();render();return}
+  if(d.tab){S.tab=d.tab;save();render();scrollTo(0,0)}
+  else if(d.day){S.day=d.day;save();render();scrollTo(0,0)}
+  else if(d.c){const[id,i]=d.c.split(":"),s=sets(find(id))[+i];s.d=s.d?0:1;if(s.d){const k=document.querySelector(`[data-k="${d.c}"]`).value;s.k=k;if(k!=="")S.kg[id]=k;startT(rest(find(id)))}save();render()}
+  else if(d.fin){let n=0;for(const e of EX[S.day]){const ss=sets(e).filter(x=>x.d&&x.r!=="");if(ss.length){(S.hist[e[0]]=S.hist[e[0]]||[]).push({t:today(),w:S.week+1,s:ss.map(x=>[x.k,x.r])});n++}delete S.cur[e[0]]}save();render();scrollTo(0,0);toast(n?`Salvati ${n} esercizi`:"Completa almeno una serie con le ripetizioni")}
+  else if(d.addw){const v=parseFloat($("#wi").value.replace(",","."));if(!(v>20&&v<300)){toast("Inserisci un peso valido");return}S.w=S.w.filter(x=>x.t!==today());S.w.push({t:today(),k:v});save();render()}
+  else if(d.delw){S.w=S.w.filter(x=>x.t!==d.delw);save();render()}
+});
+document.addEventListener("input",e=>{
+  const t=e.target,d=t.dataset;
+  if(d.k||d.r){t.value=t.value.replace(/[^0-9.,]/g,"");const[id,i]=(d.k||d.r).split(":"),s=sets(find(id))[+i];if(d.k){s.k=t.value;if(t.value!=="")S.kg[id]=t.value}else s.r=t.value;save()}
+  else if(t.id==="dk"||t.id==="dp"){S.diet.kcal=+$("#dk").value||0;S.diet.p=+$("#dp").value||0;save()}
+});
+$("#pre").innerHTML=[60,90,120,180].map(s=>`<button data-t="${s}">${s>=120?s/60+" min":s===60?"1 min":"90 s"}</button>`).join("");
+render();drawT();
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
